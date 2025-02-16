@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Sessions</title>
+    <style>
+        /* GLOBAL STYLES */
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: black;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* BACKGROUND EFFECT */
+        .neon-background {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(10, 10, 10, 1) 20%, rgba(0, 0, 0, 1) 80%);
+            z-index: -1;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            padding: 50px 20px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px cyan, 0 0 20px blue;
+            animation: glowText 1.5s infinite alternate;
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 10px cyan, 0 0 20px blue; }
+            100% { text-shadow: 0 0 15px cyan, 0 0 30px blue; }
+        }
+
+        /* PLAN CARDS */
+        .plans {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .plan {
+            width: 280px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px cyan, 0 0 20px blue;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .plan:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px cyan, 0 0 40px blue;
+        }
+
+        .plan h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: cyan;
+        }
+
+        .plan ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan ul li {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: white;
+            text-shadow: 0 0 5px cyan;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #0ff;
+            margin-top: 15px;
+        }
+
+        /* BUY BUTTON */
+        .buy-btn {
+            margin-top: 10px;
+            background: cyan;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: blue;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .plans {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .plan {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .plans {
+                flex-direction: column;
+                align-items: center;
+            }
+            .plan {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .plan {
+                width: 90%;
+                padding: 15px;
+            }
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-background"></div>
+    <div class="container">
+        <h1 class="title">Choose Your Training Plan</h1>
+        <div class="plans">
+            <div class="plan">
+                <h2>3-Day Plan</h2>
+                <ul>
+                    <li>🔥 Quick Muscle Boost</li>
+                    <li>🔥 Fat-Burning Workouts</li>
+                    <li>🔥 Personalized Guidance</li>
+                </ul>
+                <div class="price">₹499</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="plan">
+                <h2>Weekly Plan</h2>
+                <ul>
+                    <li>🔥 Full Body Strength</li>
+                    <li>🔥 Customized Diet Plan</li>
+                    <li>🔥 Daily Progress Tracking</li>
+                </ul>
+                <div class="price">₹999</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="plan">
+                <h2>Monthly Plan</h2>
+                <ul>
+                    <li>🔥 Hardcore Workouts</li>
+                    <li>🔥 24/7 Coach Support</li>
+                    <li>🔥 Recovery & Nutrition Guide</li>
+                </ul>
+                <div class="price">₹2999</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="plan">
+                <h2>Yearly Plan</h2>
+                <ul>
+                    <li>🔥 Ultimate Fitness Plan</li>
+                    <li>🔥 1-on-1 Consultation</li>
+                    <li>🔥 Exclusive Member Perks</li>
+                </ul>
+                <div class="price">₹9999</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const buyButtons = document.querySelectorAll(".buy-btn");
+
+            buyButtons.forEach(button => {
+                button.addEventListener("click", function() {
+                    alert("Plan Purchased Successfully! 🚀");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

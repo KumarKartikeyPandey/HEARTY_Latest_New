@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Meal Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form id="calorieForm">
+            <h1>Calorie Meal Planner</h1>
+            <label>Gender:</label>
+            <select name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <label>Age:</label>
+            <input type="number" name="age" required>
+            <label>Weight (kg):</label>
+            <input type="number" name="weight" required>
+            <label>Height (cm):</label>
+            <input type="number" name="height" required>
+            <label>Target Weight (kg):</label>
+            <input type="number" name="target_weight" required>
+            <label>Months to achieve target:</label>
+            <input type="number" name="months" required>
+            <label>Activity Level:</label>
+            <select name="activity_level">
+                <option value="very low">Very Low</option>
+                <option value="little">Little</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="extreme">Extreme</option>
+            </select>
+            <button type="submit">Generate Meal Plan</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script1.js') }}"></script>
+</body>
+</html>

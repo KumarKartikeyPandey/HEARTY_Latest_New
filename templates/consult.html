@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation Booking</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        /* Animated Background */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #000000, #0a0a0a, #001f3f, #002f4f);
+            background-size: 400% 400%;
+            animation: bgAnimation 10s infinite alternate;
+            color: #00ffee;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 10px #00ffee;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px #00ffee;
+        }
+
+        label {
+            font-size: 18px;
+            display: block;
+            margin: 12px 0 5px;
+            text-shadow: 0px 0px 8px #00ffee;
+        }
+
+        select, input, button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 8px auto;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+            text-align: center;
+        }
+
+        select, input {
+            background: #1a1a1a;
+            color: #00ffee;
+            border: 2px solid #00ffee;
+            transition: 0.3s ease-in-out;
+        }
+
+        select:hover, input:hover {
+            box-shadow: 0px 0px 10px #00ffee;
+        }
+
+        button {
+            background: #00ffee;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 0px 10px #00ffee;
+        }
+
+        button:hover {
+            background: #00ccff;
+            box-shadow: 0px 0px 15px #00ccff;
+            transform: scale(1.05);
+        }
+
+        .glow-box {
+            border: 2px solid #00ffee;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #00ffee;
+        }
+
+        .glow-box:focus {
+            box-shadow: 0px 0px 15px #00ffee;
+            outline: none;
+        }
+
+        /* Fix for Date Input Alignment */
+        .date-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .date-container input {
+            width: 100%;
+            padding-left: 40px;
+            text-align: left;
+        }
+
+        /* Customizing Date Picker Icon */
+        .date-container::before {
+            content: "📅";
+            position: absolute;
+            left: 12px;
+            font-size: 18px;
+            color: #00ffee;
+            text-shadow: 0px 0px 5px #00ffee;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(2);
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+            }
+            select, input, button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Book Your Consultation</h1>
+
+    <div class="container">
+        <label for="mode">Choose Mode:</label>
+        <select id="mode" class="glow-box">
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+        </select>
+
+        <label for="date">Select Date:</label>
+        <div class="date-container">
+            <input type="date" id="date" class="glow-box">
+        </div>
+
+        <label for="time">Choose Time:</label>
+        <select id="time" class="glow-box">
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>2:00 PM</option>
+            <option>4:00 PM</option>
+            <option>6:00 PM</option>
+        </select>
+
+        <p><strong>Consultation Fee: ₹350</strong></p>
+
+        <button onclick="bookConsultation()">Book Now</button>
+    </div>
+
+    <script>
+        function bookConsultation() {
+            let mode = document.getElementById("mode").value;
+            let date = document.getElementById("date").value;
+            let time = document.getElementById("time").value;
+
+            if (!date) {
+                alert("Please select a date!");
+                return;
+            }
+
+            let gmeetLink = "https://meet.google.com/xyz-abc-def";  // Example Meet Link
+            if (mode === "online") {
+                alert("✅ Payment Successful!\n📅 Date: " + date + "\n⏰ Time: " + time + "\n🔗 Click link below for your video consultation:\n" + gmeetLink);
+                window.open(gmeetLink, "_blank");
+            } else {
+                alert("✅ Payment Successful!\n📅 Date: " + date + "\n⏰ Time: " + time + "\n📍 Visit Head Office for your in-person consultation.");
+            }
+        }
+    </script>
+
+</body>
+</html>

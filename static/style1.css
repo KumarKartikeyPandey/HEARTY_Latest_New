@@ -1,0 +1,123 @@
+/* General Styling */
+body {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #121212; /* Dark Background */
+    color: #fff; /* White Text */
+}
+
+/* Container */
+.container {
+    background: #1a1a1a; /* Slightly lighter dark */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8); /* Neon Red Glow */
+    max-width: 850px;
+    width: 90%;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #ff073a; /* Neon Red */
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, button {
+    margin: 12px 0;
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #222;
+    border: 2px solid #ff073a; /* Neon Red Borders */
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0px 0px 10px #ff073a; /* Neon Glow Effect */
+}
+
+/* Button */
+button {
+    background-color: #ff073a; /* Neon Red */
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #ff2e63;
+    box-shadow: 0px 0px 15px #ff073a;
+    transform: scale(1.05);
+}
+
+/* Result Styling */
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+    max-height: 400px;
+    overflow-y: auto;
+    color: #fff;
+}
+
+h3 {
+    color: #ff073a;
+    text-shadow: 0px 0px 10px #ff073a;
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+    .container {
+        display: flex;
+        flex-direction: row;
+        max-width: 1200px;
+        justify-content: space-between;
+    }
+
+    form {
+        width: 45%;
+    }
+
+    #result {
+        width: 50%;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    form, #result {
+        width: 100%;
+    }
+}
