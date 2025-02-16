@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, flash
 from auth import auth, is_session_expired
-from database import get_db_connection
 from flask_session import Session
 import random
 
