@@ -3,107 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Fitness Glow - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
         }
-
+        
         body {
-            background: #0a0a0a;
-            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
-
-        .container {
-            width: 350px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.5);
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
             text-align: center;
         }
-
-        .container h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            color: cyan;
+        
+        .logo-container {
+            margin-bottom: 2rem;
         }
-
-        .input-group {
-            margin-bottom: 15px;
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
         }
-
-        .input-group input {
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-group input {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            background: transparent;
-            border: 2px solid cyan;
-            outline: none;
-            color: #fff;
-            border-radius: 5px;
-            transition: 0.3s;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Inter', sans-serif;
         }
-
-        .input-group input:focus {
-            box-shadow: 0px 0px 8px cyan;
-        }
-
-        .btn {
+        
+        .login-btn {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
+            padding: 1rem;
+            background: #10B981;
             border: none;
-            border-radius: 5px;
-            background: cyan;
-            color: #0a0a0a;
-            font-weight: bold;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
         }
-
-        .btn:hover {
-            background: rgba(0, 255, 255, 0.8);
-            box-shadow: 0px 0px 10px cyan;
+        
+        .login-btn:hover {
+            background: #0D9668;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
-
-        .toggle-link {
-            margin-top: 15px;
-            font-size: 14px;
-            cursor: pointer;
-            color: cyan;
+        
+        .register-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
         }
-
-        .toggle-link:hover {
-            text-decoration: underline;
+        
+        .register-link span {
+            color: #10B981;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h2>Login</h2>
+    <div class="login-container">
+        <div class="logo-container">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+                    <path d="M6 5v14M18 5v14M6 9h12M6 15h12" />
+                </svg>
+            </div>
+            <h1>FITNESS GLOW</h1>
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-top: 0.5rem;">
+                Login to continue your fitness journey
+            </p>
+        </div>
+        
         <form action="{{ url_for('auth.login') }}" method="POST">
-            <div class="input-group">
-                <input type="email" name="email" placeholder="Email" required>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
-            <div class="input-group">
-                <input type="password" name="password" placeholder="Password" required>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit" class="btn">Login</button>
+            
+            <button type="submit" class="login-btn">LOGIN</button>
         </form>
-        <p class="toggle-link"><a href="{{ url_for('auth.login') }}">Don't have an account? Register</a></p>
+        
+        <a href="{{ url_for('auth.login') }}" class="register-link">
+            Don't have an account? <span>Sign up</span>
+        </a>
     </div>
-
 </body>
 </html>
