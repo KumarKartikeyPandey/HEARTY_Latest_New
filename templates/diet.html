@@ -3,42 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie Meal Planner</title>
+    <title>NutriPlan - Smart Meal Planner</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <form id="calorieForm">
-            <h1>Calorie Meal Planner</h1>
-            <label>Gender:</label>
-            <select name="gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            <label>Age:</label>
-            <input type="number" name="age" required>
-            <label>Weight (kg):</label>
-            <input type="number" name="weight" required>
-            <label>Height (cm):</label>
-            <input type="number" name="height" required>
-            <label>Target Weight (kg):</label>
-            <input type="number" name="target_weight" required>
-            <label>Months to achieve target:</label>
-            <input type="number" name="months" required>
-            <label>Activity Level:</label>
-            <select name="activity_level">
-                <option value="very low">Very Low</option>
-                <option value="little">Little</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-                <option value="extreme">Extreme</option>
-            </select>
-            <button type="submit">Generate Meal Plan</button>
-        </form>
-
-        <div id="result"></div>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="grid-overlay"></div>
     </div>
+    
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="form-section">
+                <div class="form-header">
+                    <div class="logo-container">
+                        <div class="logo-ring"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8v12h16V10a8 8 0 0 0-8-8Z"></path><path d="M8.5 8a3.5 3.5 0 0 1 7 0"></path><path d="M7 15h10"></path><path d="M7 19h10"></path></svg>
+                    </div>
+                    <h1>NutriPlan<span class="ai-badge">AI</span></h1>
+                    <p class="subtitle">Your Personalized Meal Planning Assistant</p>
+                </div>
+
+                <form id="calorieForm" class="animated-form">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" name="age" required min="15" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label>Height (cm)</label>
+                            <input type="number" name="height" required min="100" max="250">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Current Weight (kg)</label>
+                            <input type="number" name="weight" required min="30" max="300">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Weight (kg)</label>
+                            <input type="number" name="target_weight" required min="30" max="300">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Months to Target</label>
+                            <input type="number" name="months" required min="1" max="24">
+                        </div>
+                        <div class="form-group">
+                            <label>Activity Level</label>
+                            <select name="activity_level">
+                                <option value="very low">Very Low</option>
+                                <option value="little">Little</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="extreme">Extreme</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit">
+                        <div class="button-content">
+                            <span>Generate Your Plan</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </div>
+                        <div class="button-glow"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="result-section">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='script1.js') }}"></script>
 </body>
 </html>
