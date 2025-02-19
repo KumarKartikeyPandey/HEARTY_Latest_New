@@ -3,203 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Training Sessions</title>
+    <title>Fitness Pricing</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* GLOBAL STYLES */
-        body, html {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            background: black;
-            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #111827, #000000, #111827);
             color: white;
-            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 6rem 1rem;
             text-align: center;
         }
 
-        /* BACKGROUND EFFECT */
-        .neon-background {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(10, 10, 10, 1) 20%, rgba(0, 0, 0, 1) 80%);
-            z-index: -1;
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #22d3ee, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
         }
 
-        /* MAIN CONTAINER */
-        .container {
-            padding: 50px 20px;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 48rem;
+            margin: 0 auto;
         }
 
-        .title {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px cyan, 0 0 20px blue;
-            animation: glowText 1.5s infinite alternate;
+        .pricing-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
         }
 
-        @keyframes glowText {
-            0% { text-shadow: 0 0 10px cyan, 0 0 20px blue; }
-            100% { text-shadow: 0 0 15px cyan, 0 0 30px blue; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+            margin-bottom: 6rem;
         }
 
-        /* PLAN CARDS */
-        .plans {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1000px;
-            margin: auto;
+        @media (min-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .plan {
-            width: 280px;
-            background: rgba(20, 20, 20, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 10px cyan, 0 0 20px blue;
-            transition: transform 0.3s, box-shadow 0.3s;
+        @media (min-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
-        .plan:hover {
+        .pricing-card {
+            position: relative;
+            transition: transform 0.3s;
+            height:20rem;
+        }
+
+        .pricing-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px cyan, 0 0 40px blue;
         }
 
-        .plan h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: cyan;
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 0.5rem;
+            padding: 2px;
+            background: var(--gradient);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.3;
+            transition: opacity 1s;
         }
 
-        .plan ul {
-            list-style: none;
-            padding: 0;
+        .pricing-card:hover::before {
+            opacity: 1;
         }
 
-        .plan ul li {
-            margin: 10px 0;
-            font-size: 1.1rem;
+        .pricing-card-content {
+            background: #111827;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            height: 97%;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1 rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
             color: white;
-            text-shadow: 0 0 5px cyan;
         }
 
         .price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #0ff;
-            margin-top: 15px;
-        }
-
-        /* BUY BUTTON */
-        .buy-btn {
-            margin-top: 10px;
-            background: cyan;
-            color: black;
-            padding: 10px 20px;
-            border: none;
-            font-size: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .buy-btn:hover {
-            background: blue;
+            margin-top: 1rem;
+            font-size: 2.25rem;
+            font-weight: 800;
             color: white;
-            transform: scale(1.1);
         }
 
-        /* RESPONSIVENESS */
-        @media (max-width: 1024px) {
-            .plans {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .plan {
-                width: 45%;
+        .price span {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-left: 0.25rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #d1d5db;
+            margin: 1rem 0;
+        }
+
+        .feature-icon {
+            color: #22d3ee;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Card-specific styles */
+        .starter {
+            --gradient: linear-gradient(to right, #0891b2, #2563eb);
+        }
+
+        .starter .btn {
+            background: linear-gradient(to right, #06b6d4, #3b82f6);
+        }
+
+        .starter .btn:hover {
+            background: linear-gradient(to right, #0891b2, #2563eb);
+        }
+
+        .pro {
+            --gradient: linear-gradient(to right, #7c3aed, #2563eb);
+        }
+
+        .pro .btn {
+            background: linear-gradient(to right, #8b5cf6, #3b82f6);
+        }
+
+        .pro .btn:hover {
+            background: linear-gradient(to right, #7c3aed, #2563eb);
+        }
+
+        .elite {
+            --gradient: linear-gradient(to right, #d97706, #ea580c);
+        }
+
+        .elite .btn {
+            background: linear-gradient(to right, #f59e0b, #f97316);
+        }
+
+        .elite .btn:hover {
+            background: linear-gradient(to right, #d97706, #ea580c);
+        }
+
+        .ultimate {
+            --gradient: linear-gradient(to right, #dc2626, #db2777);
+        }
+
+        .ultimate .btn {
+            background: linear-gradient(to right, #ef4444, #ec4899);
+        }
+
+        .ultimate .btn:hover {
+            background: linear-gradient(to right, #dc2626, #db2777);
+        }
+
+        .features-section {
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        .features-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #22d3ee, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        @media (max-width: 768px) {
-            .plans {
-                flex-direction: column;
-                align-items: center;
-            }
-            .plan {
-                width: 80%;
-            }
+        .feature-card {
+            background: #111827;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
         }
 
-        @media (max-width: 480px) {
-            .plan {
-                width: 90%;
-                padding: 15px;
-            }
-            .title {
-                font-size: 2rem;
-            }
+        .feature-icon-wrapper {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 auto 1rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card:nth-child(1) .feature-icon-wrapper {
+            background: linear-gradient(to right, #06b6d4, #3b82f6);
+        }
+
+        .feature-card:nth-child(2) .feature-icon-wrapper {
+            background: linear-gradient(to right, #8b5cf6, #3b82f6);
+        }
+
+        .feature-card:nth-child(3) .feature-icon-wrapper {
+            background: linear-gradient(to right, #f59e0b, #f97316);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #9ca3af;
         }
     </style>
 </head>
 <body>
-    <div class="neon-background"></div>
-    <div class="container">
-        <h1 class="title">Choose Your Training Plan</h1>
-        <div class="plans">
-            <div class="plan">
-                <h2>3-Day Plan</h2>
-                <ul>
-                    <li>🔥 Quick Muscle Boost</li>
-                    <li>🔥 Fat-Burning Workouts</li>
-                    <li>🔥 Personalized Guidance</li>
-                </ul>
-                <div class="price">₹499</div>
-                <button class="buy-btn">Buy Now</button>
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">ELEVATE YOUR FITNESS JOURNEY</h1>
+            <p class="hero-subtitle">Transform your body and mind with our premium training programs designed for maximum results</p>
+        </div>
+    </div>
+
+    <div class="pricing-section">
+        <div class="pricing-grid">
+            <!-- Starter Plan -->
+            <div class="pricing-card starter">
+                <div class="pricing-card-content">
+                    <div class="card-header">
+                        <h3 class="card-title">Starter</h3>
+                        <i data-lucide="dumbbell" class="feature-icon"></i>
+                    </div>
+                    <div class="price">₹1,999<span>/month</span></div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i data-lucide="clock" class="feature-icon"></i>
+                            <span>4 Training Sessions/Week</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="flame" class="feature-icon"></i>
+                            <span>Basic Nutrition Guide</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="trophy" class="feature-icon"></i>
+                            <span>Progress Tracking App</span>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="handlePurchase('Starter', '₹1,999/month')">Start Your Journey</button>
             </div>
-            <div class="plan">
-                <h2>Weekly Plan</h2>
-                <ul>
-                    <li>🔥 Full Body Strength</li>
-                    <li>🔥 Customized Diet Plan</li>
-                    <li>🔥 Daily Progress Tracking</li>
-                </ul>
-                <div class="price">₹999</div>
-                <button class="buy-btn">Buy Now</button>
+
+            <!-- Pro Plan -->
+            <div class="pricing-card pro">
+                <div class="pricing-card-content">
+                    <div class="card-header">
+                        <h3 class="card-title">Pro</h3>
+                        <i data-lucide="crown" class="feature-icon"></i>
+                    </div>
+                    <div class="price">₹3,999<span>/month</span></div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i data-lucide="zap" class="feature-icon"></i>
+                            <span>Unlimited Training Sessions</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="flame" class="feature-icon"></i>
+                            <span>Custom Meal Plans</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="users" class="feature-icon"></i>
+                            <span>1-on-1 Coaching</span>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="handlePurchase('Pro', '₹3,999/month')">Level Up Now</button>
             </div>
-            <div class="plan">
-                <h2>Monthly Plan</h2>
-                <ul>
-                    <li>🔥 Hardcore Workouts</li>
-                    <li>🔥 24/7 Coach Support</li>
-                    <li>🔥 Recovery & Nutrition Guide</li>
-                </ul>
-                <div class="price">₹2999</div>
-                <button class="buy-btn">Buy Now</button>
+            
+
+            <!-- Elite Plan -->
+            <div class="pricing-card elite">
+                <div class="pricing-card-content">
+                    <div class="card-header">
+                        <h3 class="card-title">Elite</h3>
+                        <i data-lucide="star" class="feature-icon"></i>
+                    </div>
+                    <div class="price">₹7,999<span>/month</span></div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i data-lucide="crown" class="feature-icon"></i>
+                            <span>VIP Training Sessions</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="zap" class="feature-icon"></i>
+                            <span>Elite Performance Diet</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="star" class="feature-icon"></i>
+                            <span>Recovery Spa Access</span>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="handlePurchase('Elite', '₹7,999/month')">Join Elite</button>
             </div>
-            <div class="plan">
-                <h2>Yearly Plan</h2>
-                <ul>
-                    <li>🔥 Ultimate Fitness Plan</li>
-                    <li>🔥 1-on-1 Consultation</li>
-                    <li>🔥 Exclusive Member Perks</li>
-                </ul>
-                <div class="price">₹9999</div>
-                <button class="buy-btn">Buy Now</button>
+
+            <!-- Ultimate Plan -->
+            <div class="pricing-card ultimate">
+                <div class="pricing-card-content">
+                    <div class="card-header">
+                        <h3 class="card-title">Ultimate</h3>
+                        <i data-lucide="trophy" class="feature-icon"></i>
+                    </div>
+                    <div class="price">₹14,999<span>/month</span></div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i data-lucide="users" class="feature-icon"></i>
+                            <span>24/7 Personal Training</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="trophy" class="feature-icon"></i>
+                            <span>Competition Prep</span>
+                        </li>
+                        <li class="feature-item">
+                            <i data-lucide="crown" class="feature-icon"></i>
+                            <span>Lifestyle Coaching</span>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="handlePurchase('Ultimate', '₹14,999/month')">Go Ultimate</button>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2 class="features-title">Why Choose Our Programs?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="trophy" class="text-white"></i>
+                    </div>
+                    <h3>Expert Trainers</h3>
+                    <p>World-class coaches dedicated to your success</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="zap" class="text-white"></i>
+                    </div>
+                    <h3>Custom Programs</h3>
+                    <p>Tailored workouts for your specific goals</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i data-lucide="users" class="text-white"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>Join a motivated community of fitness enthusiasts</p>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const buyButtons = document.querySelectorAll(".buy-btn");
 
-            buyButtons.forEach(button => {
-                button.addEventListener("click", function() {
-                    alert("Plan Purchased Successfully! 🚀");
-                });
-            });
-        });
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        function handlePurchase(plan, price) {
+            alert(`Thank you for your interest in the ${plan} plan (${price})!\n\nOur team will contact you shortly to complete your registration.`);
+        }
     </script>
 </body>
 </html>
