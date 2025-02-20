@@ -3,190 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultation Booking</title>
+    <title>Health Consultation</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap');
 
-        /* Animated Background */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
         body {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(45deg, #000000, #0a0a0a, #001f3f, #002f4f);
-            background-size: 400% 400%;
-            animation: bgAnimation 10s infinite alternate;
-            color: #00ffee;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        @keyframes bgAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        h1 {
-            font-size: 28px;
-            text-transform: uppercase;
-            text-shadow: 0px 0px 10px #00ffee;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 99, 71, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
-            max-width: 400px;
-            margin: 40px auto;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 15px #00ffee;
+            max-width: 1000px;
+            width: 100%;
+            z-index: 2;
         }
 
-        label {
-            font-size: 18px;
-            display: block;
-            margin: 12px 0 5px;
-            text-shadow: 0px 0px 8px #00ffee;
-        }
-
-        select, input, button {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 8px auto;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            display: block;
+        .header {
             text-align: center;
-        }
-
-        select, input {
-            background: #1a1a1a;
-            color: #00ffee;
-            border: 2px solid #00ffee;
-            transition: 0.3s ease-in-out;
-        }
-
-        select:hover, input:hover {
-            box-shadow: 0px 0px 10px #00ffee;
-        }
-
-        button {
-            background: #00ffee;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s ease-in-out;
-            box-shadow: 0px 0px 10px #00ffee;
-        }
-
-        button:hover {
-            background: #00ccff;
-            box-shadow: 0px 0px 15px #00ccff;
-            transform: scale(1.05);
-        }
-
-        .glow-box {
-            border: 2px solid #00ffee;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px #00ffee;
-        }
-
-        .glow-box:focus {
-            box-shadow: 0px 0px 15px #00ffee;
-            outline: none;
-        }
-
-        /* Fix for Date Input Alignment */
-        .date-container {
+            margin-bottom: 3rem;
             position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header p {
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .booking-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
+            gap: 0.5rem;
+            color: white;
         }
 
-        .date-container input {
-            width: 100%;
-            padding-left: 40px;
-            text-align: left;
+        .mode-btn.active {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-color: transparent;
         }
 
-        /* Customizing Date Picker Icon */
-        .date-container::before {
-            content: "📅";
+        .mode-btn:hover:not(.active) {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
             position: absolute;
-            left: 12px;
-            font-size: 18px;
-            color: #00ffee;
-            text-shadow: 0px 0px 5px #00ffee;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4ecdc4;
         }
 
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1) brightness(2);
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="date"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
+        }
+
+        .summary-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .summary-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4ecdc4;
+        }
+
+        .fee-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .fee-amount {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4ecdc4;
+            margin: 0.5rem 0;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 500px) {
-            .container {
-                width: 90%;
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header i {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.primary {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .booking-card {
+                grid-template-columns: 1fr;
             }
-            select, input, button {
-                width: 100%;
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            body {
+                padding: 1rem;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <h1>Book Your Consultation</h1>
-
     <div class="container">
-        <label for="mode">Choose Mode:</label>
-        <select id="mode" class="glow-box">
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
-        </select>
-
-        <label for="date">Select Date:</label>
-        <div class="date-container">
-            <input type="date" id="date" class="glow-box">
+        <div class="header">
+            <h1>Book Your Consultation</h1>
+            <p>Transform your health journey with expert guidance</p>
         </div>
 
-        <label for="time">Choose Time:</label>
-        <select id="time" class="glow-box">
-            <option>10:00 AM</option>
-            <option>11:00 AM</option>
-            <option>12:00 PM</option>
-            <option>2:00 PM</option>
-            <option>4:00 PM</option>
-            <option>6:00 PM</option>
-        </select>
+        <div class="booking-card">
+            <div class="booking-form">
+                <div class="form-group">
+                    <label>Consultation Mode</label>
+                    <div class="mode-selector">
+                        <button class="mode-btn" onclick="setMode('online')">
+                            <i class="fas fa-video"></i>
+                            <span>Online</span>
+                        </button>
+                        <button class="mode-btn " onclick="setMode('offline')">
+                            <i class="fas fa-users"></i>
+                            <span>In-Person</span>
+                        </button>
+                    </div>
+                </div>
 
-        <p><strong>Consultation Fee: ₹350</strong></p>
+                <div class="form-group">
+                    <label>Select Date</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="date">
+                    </div>
+                </div>
 
-        <button onclick="bookConsultation()">Book Now</button>
+                <div class="form-group">
+                    <label>Select Time</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-clock"></i>
+                        <select id="time">
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>2:00 PM</option>
+                            <option>4:00 PM</option>
+                            <option>6:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-header">
+                    <h3>Consultation Summary</h3>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span id="mode-text">Online Consultation</span>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span id="date-text">Select a date</span>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <span id="time-text">10:00 AM</span>
+                </div>
+
+                <div class="fee-section">
+                    <p>Consultation Fee</p>
+                    <div class="fee-amount">₹350</div>
+                    <button class="book-btn" onclick="bookConsultation()">
+                        Book Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3 id="modal-title">Booking Confirmed!</h3>
+            </div>
+            <p id="modal-message"></p>
+            <div class="modal-actions" id="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
     </div>
 
     <script>
+        let currentMode = 'online';
+        const modal = document.getElementById('modal');
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const dateInput = document.getElementById('date');
+        const timeSelect = document.getElementById('time');
+        const modeText = document.getElementById('mode-text');
+        const dateText = document.getElementById('date-text');
+        const timeText = document.getElementById('time-text');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalActions = document.getElementById('modal-actions');
+
+        function setMode(mode) {
+            currentMode = mode;
+            modeButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(mode)) {
+                    btn.classList.add('active');
+                }
+            });
+            modeText.textContent = `${mode.charAt(0).toUpperCase() + mode.slice(1)} Consultation`;
+            updateSummaryIcon();
+        }
+
+        function updateSummaryIcon() {
+            const icon = document.querySelector('.summary-icon i');
+            icon.className = currentMode === 'online' ? 'fas fa-video' : 'fas fa-users';
+        }
+
+        dateInput.addEventListener('change', (e) => {
+            dateText.textContent = e.target.value || 'Select a date';
+        });
+
+        timeSelect.addEventListener('change', (e) => {
+            timeText.textContent = e.target.value;
+        });
+
+        async function sendSMS(mode, date, time, location) {
+    const phoneNumber = "8574276567";  // Receiver's phone number
+    const apiKey = "";  // Replace with your Fast2SMS API key
+
+    const message = `Mode: ${mode}\nDate: ${date}\nTime: ${time}\nLocation: ${location}`;
+
+    const url = `https://www.fast2sms.com/dev/bulkV2?route=q&message=${encodeURIComponent(message)}&language=english&flash=0&numbers=${phoneNumber}`;
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "authorization": apiKey
+            }
+        });
+
+        const result = await response.json();
+        console.log("SMS Sent Response:", result);
+        alert("SMS sent successfully!");
+    } catch (error) {
+        console.error("SMS Sending Error:", error);
+        alert("Failed to send SMS.");
+    }
+}
+
+
         function bookConsultation() {
-            let mode = document.getElementById("mode").value;
-            let date = document.getElementById("date").value;
-            let time = document.getElementById("time").value;
+            const date = dateInput.value;
+            const time = timeSelect.value;
 
             if (!date) {
-                alert("Please select a date!");
+                showModal('Error', 'Please select a date!', false);
                 return;
             }
 
-            let gmeetLink = "https://meet.google.com/xyz-abc-def";  // Example Meet Link
-            if (mode === "online") {
-                alert("✅ Payment Successful!\n📅 Date: " + date + "\n⏰ Time: " + time + "\n🔗 Click link below for your video consultation:\n" + gmeetLink);
-                window.open(gmeetLink, "_blank");
+            const gmeetLink = "https://meet.google.com/xyz-abc-def";
+            const location = (currentMode === "online") ? gmeetLink : "Head Office";
+
+            // Send SMS
+            sendSMS(currentMode, date, time, location);
+
+            if (currentMode === "online") {
+                showModal(
+                    'Booking Confirmed!',
+                    `Your video consultation is scheduled for ${date} at ${time}\n\nClick the button below to join your consultation.`,
+                    true,
+                    gmeetLink
+                );
             } else {
-                alert("✅ Payment Successful!\n📅 Date: " + date + "\n⏰ Time: " + time + "\n📍 Visit Head Office for your in-person consultation.");
+                showModal(
+                    'Booking Confirmed!',
+                    `Your in-person consultation is scheduled for ${date} at ${time}\n\nPlease visit our Head Office for your consultation.`,
+                    false
+                );
             }
         }
-    </script>
 
+        function showModal(title, message, showMeetLink, meetLink) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+
+            if (showMeetLink) {
+                modalActions.innerHTML = `
+                    <a href="${meetLink}" target="_blank" class="modal-btn primary">Join Meeting</a>
+                    <button class="modal-btn secondary" onclick="closeModal()">Close</button>
+                `;
+            } else {
+                modalActions.innerHTML = `
+                    <button class="modal-btn secondary" onclick="closeModal()">Close</button>
+                `;
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+    </script>
 </body>
 </html>
